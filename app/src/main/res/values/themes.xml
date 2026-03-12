@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.SaveStatusPRO" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/green_accent</item>
+        <item name="colorSecondary">@color/green_accent</item>
+        <item name="colorTertiary">@color/green_accent</item>
+        <item name="colorSurface">@color/card_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:colorBackground">@color/surface_dark</item>
+        <item name="android:statusBarColor">@color/toolbar_bg</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="tabStyle">@style/Widget.SaveStatusPRO.TabLayout</item>
+    </style>
+
+    <style name="Theme.SaveStatusPRO.FullScreen" parent="Theme.SaveStatusPRO">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.SaveStatusPRO.TabLayout" parent="Widget.Material3.TabLayout">
+        <item name="tabIndicatorColor">@color/green_accent</item>
+        <item name="tabSelectedTextColor">@color/green_accent</item>
+        <item name="tabTextColor">@color/text_secondary</item>
+        <item name="tabIndicatorHeight">3dp</item>
+        <item name="tabRippleColor">@color/ripple_green</item>
+    </style>
+
+    <style name="TextAppearance.SaveStatusPRO.Badge" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.SaveStatusPRO.BottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemIconTint">@drawable/bottom_nav_item_tint</item>
+        <item name="itemTextColor">@drawable/bottom_nav_item_tint</item>
+        <item name="backgroundTint">@color/bottom_nav_bg</item>
+    </style>
+
+    <style name="Widget.SaveStatusPRO.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/card_dark</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="Widget.SaveStatusPRO.Button.Download" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/green_accent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="iconTint">@color/white</item>
+    </style>
+
+    <style name="Widget.SaveStatusPRO.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/text_secondary</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="iconTint">@color/text_primary</item>
+    </style>
+
+    <style name="GreenSwitchTheme" parent="Theme.MaterialComponents">
+        <item name="colorControlActivated">#22C55E</item>
+        <item name="colorSwitchThumbNormal">#AAAAAA</item>
+        <item name="android:colorForeground">#AAAAAA</item>
+    </style>
+
+    <style name="TabTextAppearance" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

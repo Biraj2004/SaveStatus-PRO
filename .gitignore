@@ -1,0 +1,96 @@
+##########################
+# Android / Gradle
+##########################
+
+# Build outputs
+build/
+app/build/
+**/build/
+
+# Gradle cache & wrapper internals
+.gradle/
+gradle/wrapper/gradle-wrapper.jar
+
+# Local machine config (contains SDK path — never commit)
+local.properties
+
+# Android Studio / IntelliJ IDEA
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/shelf/
+.idea/caches/
+.idea/deploymentTargetSelector.xml
+.idea/deviceManager.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/studiobot.xml
+.idea/appInsightsSettings.xml
+.idea/copilot.data.migration.ask2agent.xml
+*.iml
+
+# Android Studio profiler / layout inspector captures
+captures/
+
+# Kotlin compiler artefacts
+.kotlin/
+
+# Exported APKs & release artefacts (keep source, not binaries)
+APK_Export/
+*.apk
+*.aab
+*.ap_
+
+# ProGuard / R8 mapping output (generated)
+*.map
+mapping.txt
+
+##########################
+# Build logs
+##########################
+
+# Local build log files (e.g. build_v102.txt, build_v103.txt)
+build_*.txt
+
+##########################
+# OS generated
+##########################
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+##########################
+# Misc
+##########################
+
+# Compiled Java / Kotlin class files
+*.class
+
+# Heap dumps (Android Studio memory profiler)
+*.hprof
+
+# Logs
+*.log
+logs/
+
+# Merge conflict originals
+*.orig
+
+# Editor swap files
+*.swp
+*.swo
+
+# Environment / secrets
+*.env
+keystore.properties
+release.keystore
+*.jks
+*.keystore

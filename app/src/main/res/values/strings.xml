@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">SaveStatus PRO</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="whatsapp_business">WhatsApp Business</string>
+    <string name="tab_recent">Recent</string>
+    <string name="tab_images">Images</string>
+    <string name="tab_videos">Videos</string>
+    <string name="tab_downloaded">Downloaded</string>
+    <string name="download">Download</string>
+    <string name="share">Share</string>
+    <string name="set_as_wallpaper">Wallpaper</string>
+    <string name="repost">Repost</string>
+    <string name="no_statuses_found">No statuses found.\nOpen WhatsApp and view some statuses first.</string>
+    <string name="no_downloads">No downloads yet.\nTap ↓ on any status to save it.</string>
+    <string name="downloading">Downloading…</string>
+    <string name="download_success">Saved to SaveStatus PRO</string>
+    <string name="download_failed">Download failed. Please try again.</string>
+    <string name="already_downloaded">Already Downloaded</string>
+    <string name="permission_required">Storage permission is required\nto view WhatsApp statuses.</string>
+    <string name="grant_permission">Grant Permission</string>
+    <string name="permission_denied">Permission denied. Cannot access statuses.</string>
+    <string name="loading">Loading statuses…</string>
+    <string name="high_resolution_status">HIGH RESOLUTION STATUS</string>
+    <string name="wallpaper_set">Wallpaper set successfully</string>
+    <string name="wallpaper_failed">Failed to set wallpaper.</string>
+    <string name="share_via">Share via</string>
+    <string name="content_description_status_thumbnail">Status thumbnail</string>
+    <string name="content_description_download">Download status</string>
+    <string name="content_description_play">Play video</string>
+    <string name="content_description_back">Go back</string>
+    <string name="content_description_search">Search</string>
+    <string name="content_description_more">More options</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="manage_storage_required">This app requires "All Files Access" permission to read WhatsApp statuses (Android 11+). Please tap Open Settings and enable it under Special App Access → All files access.</string>
+    <!-- Toast messages -->
+    <string name="toast_switched_wa">Switched to WhatsApp</string>
+    <string name="toast_switched_biz">Switched to WhatsApp Business</string>
+    <string name="toast_error_loading">Error loading statuses</string>
+    <string name="toast_whatsapp_not_installed">WhatsApp is not installed</string>
+    <string name="toast_file_not_found">File not found</string>
+    <!-- Empty state -->
+    <string name="empty_title_status">No Statuses Yet</string>
+    <string name="empty_title_images">No Images Found</string>
+    <string name="empty_title_videos">No Videos Found</string>
+    <string name="empty_title_downloads">No Downloads Yet</string>
+    <string name="empty_msg_images">Open WhatsApp and view some image statuses first.</string>
+    <string name="empty_msg_videos">Open WhatsApp and view some video statuses first.</string>
+</resources>

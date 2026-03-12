@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_dark">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="6dp"
+            android:paddingBottom="96dp"
+            android:clipToPadding="false"
+            android:scrollbars="none"
+            tools:listitem="@layout/item_status" />
+
+        <!-- Loading indicator -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/green_accent"
+            android:visibility="gone" />
+
+        <!-- Empty state – centered, animated -->
+        <LinearLayout
+            android:id="@+id/layoutEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingStart="48dp"
+            android:paddingEnd="48dp"
+            android:paddingBottom="80dp"
+            android:visibility="gone">
+
+            <!-- Animated emoji icon -->
+            <TextView
+                android:id="@+id/tvEmptyIcon"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:gravity="center"
+                android:text="📭"
+                android:textSize="52sp"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tvEmptyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Statuses Yet"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-medium"
+                android:textAlignment="center"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Subtitle -->
+            <TextView
+                android:id="@+id/tvEmptyMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_statuses_found"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:textAlignment="center"
+                android:lineSpacingExtra="5dp"
+                android:letterSpacing="0.01" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
