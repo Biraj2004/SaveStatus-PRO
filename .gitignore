@@ -88,9 +88,14 @@ logs/
 *.swp
 *.swo
 
+# VS Code workspace settings
+.vscode/
+
 # Environment / secrets
 *.env
 keystore.properties
 release.keystore
 *.jks
 *.keystore
+
+/.GraphicsPath
