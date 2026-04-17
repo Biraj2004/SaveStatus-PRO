@@ -19,17 +19,18 @@ object FileUtils {
 
     private const val TAG = "FileUtils"
 
-    // Folder name in root storage: /storage/emulated/0/SaveStatus PRO/
+    // Folder name in Downloads: /storage/emulated/0/Download/SaveStatus/
     const val SAVE_DIR_NAME = "SaveStatus PRO"
-    const val IMAGES_DIR = "Images"
-    const val VIDEOS_DIR = "Videos"
+    const val IMAGES_DIR = "SaveStatus Images"
+    const val VIDEOS_DIR = "SaveStatus Videos"
 
     /**
-     * Returns /storage/emulated/0/SaveStatus PRO/Images  or  .../Videos
+    * Returns /storage/emulated/0/Download/SaveStatus/SaveStatus Images
+    * or /storage/emulated/0/Download/SaveStatus/SaveStatus Videos
      * Creates the directory if it doesn't exist.
      */
     fun getSaveDirectory(type: StatusType): File {
-        val root = Environment.getExternalStorageDirectory()
+        val root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         val subDir = if (type == StatusType.IMAGE) IMAGES_DIR else VIDEOS_DIR
         val dir = File(root, "$SAVE_DIR_NAME/$subDir")
         if (!dir.exists()) {
@@ -40,11 +41,11 @@ object FileUtils {
     }
 
     /**
-     * Returns /storage/emulated/0/SaveStatus PRO/
+    * Returns /storage/emulated/0/Download/SaveStatus/
      * Creates the directory if it doesn't exist.
      */
     fun getSaveRootDirectory(): File {
-        val root = Environment.getExternalStorageDirectory()
+        val root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         val dir = File(root, SAVE_DIR_NAME)
         if (!dir.exists()) dir.mkdirs()
         return dir
@@ -55,68 +56,81 @@ object FileUtils {
      * Returns the destination file on success, null on failure.
      */
     fun copyFileToSaveDir(src: File, type: StatusType, context: Context): File? {
-        return try {
-            val destDir = getSaveDirectory(type)
-            val destFile = File(destDir, src.name)
-            if (destFile.exists()) {
-                Log.d(TAG, "File already exists: ${destFile.absolutePath}")
-                return destFile
-            }
+        val destDir = getSaveDirectory(type)
+        val destFile = File(destDir, src.name)
 
+        if (destFile.exists()) {
+            Log.d(TAG, "File already exists: ${destFile.absolutePath}")
+            return destFile
+        }
+
+        return try {
             FileInputStream(src).use { input ->
                 FileOutputStream(destFile).use { output ->
                     input.copyTo(output)
                 }
             }
-
-            Log.d(TAG, "Copied to: ${destFile.absolutePath}")
             notifyMediaStore(context, destFile, type)
+            Log.d(TAG, "Copied via filesystem to: ${destFile.absolutePath}")
             destFile
+        } catch (fsError: Exception) {
+            Log.w(TAG, "Filesystem copy failed, trying MediaStore fallback", fsError)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                copyViaMediaStore(context, src, type)
+            } else {
+                Log.e(TAG, "Failed to copy file: ${src.absolutePath}", fsError)
+                null
+            }
+        }
+    }
+
+    private fun copyViaMediaStore(context: Context, src: File, type: StatusType): File? {
+        val isVideo = type == StatusType.VIDEO || src.extension.lowercase() == "mp4"
+        val mimeType = if (isVideo) "video/mp4" else "image/jpeg"
+        val subDir = if (isVideo) VIDEOS_DIR else IMAGES_DIR
+        val relativePath = "${Environment.DIRECTORY_DOWNLOADS}/$SAVE_DIR_NAME/$subDir"
+        val collection = if (isVideo) {
+            MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+        } else {
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        }
+
+        val values = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, src.name)
+            put(MediaStore.MediaColumns.MIME_TYPE, mimeType)
+            put(MediaStore.MediaColumns.RELATIVE_PATH, relativePath)
+            put(MediaStore.MediaColumns.IS_PENDING, 1)
+        }
+
+        return try {
+            val uri = context.contentResolver.insert(collection, values) ?: return null
+            context.contentResolver.openOutputStream(uri)?.use { output ->
+                FileInputStream(src).use { input -> input.copyTo(output) }
+            } ?: return null
+
+            values.clear()
+            values.put(MediaStore.MediaColumns.IS_PENDING, 0)
+            context.contentResolver.update(uri, values, null, null)
+
+            val file = File(getSaveDirectory(type), src.name)
+            Log.d(TAG, "Copied via MediaStore to: $relativePath/${src.name}")
+            file
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to copy file: ${src.absolutePath}", e)
+            Log.e(TAG, "MediaStore fallback failed", e)
             null
         }
     }
 
-    /**
-     * Notifies MediaStore so the file appears in the Gallery immediately.
-     */
+    /** Notifies media scanner so the file appears in gallery/file apps quickly. */
     fun notifyMediaStore(context: Context, file: File, type: StatusType = StatusType.IMAGE) {
         val isVideo = type == StatusType.VIDEO || file.extension.lowercase() == "mp4"
         val mimeType = if (isVideo) "video/mp4" else "image/jpeg"
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            // Android 10+: insert into MediaStore properly
-            val relativePath = if (isVideo) {
-                "Movies/$SAVE_DIR_NAME"
-            } else {
-                "Pictures/$SAVE_DIR_NAME"
-            }
-            val contentUri = if (isVideo) {
-                MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-            } else {
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            }
-            val values = ContentValues().apply {
-                put(MediaStore.MediaColumns.DISPLAY_NAME, file.name)
-                put(MediaStore.MediaColumns.MIME_TYPE, mimeType)
-                put(MediaStore.MediaColumns.RELATIVE_PATH, relativePath)
-                put(MediaStore.MediaColumns.IS_PENDING, 0)
-            }
-            try {
-                context.contentResolver.insert(contentUri, values)
-            } catch (e: Exception) {
-                Log.e(TAG, "MediaStore insert failed", e)
-            }
-        } else {
-            // Android < 10: use MediaScanner
-            MediaScannerConnection.scanFile(
-                context,
-                arrayOf(file.absolutePath),
-                arrayOf(mimeType),
-                null
-            )
-        }
+        MediaScannerConnection.scanFile(
+            context,
+            arrayOf(file.absolutePath),
+            arrayOf(mimeType),
+            null
+        )
     }
 
     fun isAlreadyDownloaded(src: File): Boolean {

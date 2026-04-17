@@ -15,8 +15,10 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="6dp"
-            android:paddingBottom="96dp"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="98dp"
             android:clipToPadding="false"
             android:scrollbars="none"
             tools:listitem="@layout/item_status" />
@@ -40,7 +42,7 @@
             android:gravity="center"
             android:paddingStart="48dp"
             android:paddingEnd="48dp"
-            android:paddingBottom="80dp"
+            android:paddingBottom="96dp"
             android:visibility="gone">
 
             <!-- Animated emoji icon -->
@@ -49,7 +51,7 @@
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:gravity="center"
-                android:text="📭"
+                android:text="@string/empty_icon_mailbox"
                 android:textSize="52sp"
                 android:layout_marginBottom="24dp" />
 
@@ -58,7 +60,7 @@
                 android:id="@+id/tvEmptyTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No Statuses Yet"
+                android:text="@string/empty_title_status"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 android:fontFamily="sans-serif-medium"

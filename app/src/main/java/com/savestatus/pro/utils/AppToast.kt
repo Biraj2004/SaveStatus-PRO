@@ -66,7 +66,8 @@ object AppToast {
                 it.duration = duration
                 @Suppress("DEPRECATION")
                 it.view = view
-                it.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 220)
+                val yOffset = (context.resources.displayMetrics.density * 130).toInt()
+                it.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, yOffset)
             }
             toast.show()
             currentToast = toast

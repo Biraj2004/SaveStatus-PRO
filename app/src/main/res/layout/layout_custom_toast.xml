@@ -11,7 +11,7 @@
     android:paddingTop="13dp"
     android:paddingBottom="13dp"
     android:minWidth="120dp"
-    android:maxWidth="300dp"
+    android:maxWidth="272dp"
     android:elevation="8dp">
 
     <!-- Optional icon -->

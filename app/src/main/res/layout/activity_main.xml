@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/surface_dark"
+    android:background="@drawable/bg_main_gradient"
     tools:context=".ui.MainActivity">
 
     <!-- ─── AppBar ─────────────────────────────────────────────── -->
@@ -13,7 +14,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/surface_dark"
+        android:background="@android:color/transparent"
         android:stateListAnimator="@null"
         android:layerType="hardware"
         app:elevation="0dp">
@@ -25,8 +26,8 @@
             android:orientation="horizontal"
             android:paddingStart="20dp"
             android:paddingEnd="16dp"
-            android:paddingTop="52dp"
-            android:paddingBottom="4dp"
+            android:paddingTop="18dp"
+            android:paddingBottom="8dp"
             android:gravity="center_vertical">
 
             <TextView
@@ -34,7 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Status"
+                android:text="@string/home_title"
                 android:textColor="@color/text_primary"
                 android:textSize="28sp"
                 android:letterSpacing="-0.02"
@@ -55,7 +56,7 @@
                     android:id="@+id/tvWhatsApp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="WA"
+                    android:text="@string/label_wa"
                     android:textColor="@color/text_primary"
                     android:textSize="12sp"
                     android:letterSpacing="0.02"
@@ -68,13 +69,15 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:checked="false"
+                    app:thumbTint="@drawable/switch_thumb_tint"
+                    app:trackTint="@drawable/switch_track_tint"
                     android:theme="@style/GreenSwitchTheme" />
 
                 <TextView
                     android:id="@+id/tvBusiness"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Biz"
+                    android:text="@string/label_wa_biz"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp"
                     android:letterSpacing="0.02"
@@ -88,9 +91,9 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/surface_dark"
+            android:background="@android:color/transparent"
             app:tabIndicatorColor="@color/green_accent"
-            app:tabSelectedTextColor="@color/green_accent"
+            app:tabSelectedTextColor="@color/nav_active"
             app:tabTextColor="@color/text_secondary"
             app:tabIndicatorHeight="2dp"
             app:tabMode="fixed"
@@ -106,7 +109,6 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="120dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <!-- ─── Permission overlay ─────────────────────────────────── -->
@@ -123,14 +125,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🔒"
+            android:text="@string/empty_icon_lock"
             android:textSize="64sp"
             android:layout_marginBottom="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Permission Required"
+            android:text="@string/permission_required_title"
             android:textColor="@color/text_primary"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -162,34 +164,37 @@
     </LinearLayout>
 
     <!-- ─── Floating Bottom Capsule Nav ────────────────────────── -->
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/bottomNavWrapper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="20dp"
         android:elevation="24dp">
 
         <!-- Capsule background -->
         <LinearLayout
             android:id="@+id/bottomNavContainer"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="56dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:background="@drawable/bg_nav_capsule"
-            android:paddingStart="6dp"
-            android:paddingEnd="6dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:elevation="24dp">
 
             <!-- Status tab -->
             <LinearLayout
                 android:id="@+id/btnNavStatus"
                 android:layout_width="wrap_content"
-                android:layout_height="37dp"
+                android:layout_height="42dp"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
                 android:background="@drawable/bg_nav_item_selected"
                 android:clickable="true"
                 android:focusable="true">
@@ -199,15 +204,15 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/ic_status"
-                    android:tint="@color/green_accent"
+                    app:tint="@color/green_accent"
                     android:layout_marginEnd="7dp"
-                    android:contentDescription="Status" />
+                    android:contentDescription="@string/nav_status" />
 
                 <TextView
                     android:id="@+id/tvNavStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Status"
+                    android:text="@string/nav_status"
                     android:textColor="@color/green_accent"
                     android:textSize="13sp"
                     android:fontFamily="sans-serif-medium"
@@ -219,20 +224,20 @@
             <!-- Divider -->
             <View
                 android:layout_width="1dp"
-                android:layout_height="22dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:background="@color/divider" />
+                android:layout_height="24dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@color/divider_soft" />
 
             <!-- Downloaded tab -->
             <LinearLayout
                 android:id="@+id/btnNavDownloaded"
                 android:layout_width="wrap_content"
-                android:layout_height="37dp"
+                android:layout_height="42dp"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
                 android:background="@drawable/bg_nav_item_ripple"
                 android:clickable="true"
                 android:focusable="true">
@@ -242,15 +247,15 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/ic_downloaded"
-                    android:tint="@color/text_secondary"
+                    app:tint="@color/text_secondary"
                     android:layout_marginEnd="7dp"
-                    android:contentDescription="Downloaded" />
+                    android:contentDescription="@string/nav_downloaded" />
 
                 <TextView
                     android:id="@+id/tvNavDownloaded"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Downloaded"
+                    android:text="@string/nav_downloaded"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp"
                     android:fontFamily="sans-serif"
@@ -259,6 +264,19 @@
             </LinearLayout>
 
         </LinearLayout>
-    </FrameLayout>
+        <ImageButton
+            android:id="@+id/btnNavAbout"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_nav_about_droplet"
+            android:padding="16dp"
+            android:src="@drawable/ic_info"
+            app:tint="@color/nav_active"
+            android:contentDescription="@string/about_title"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

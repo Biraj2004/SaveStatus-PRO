@@ -49,7 +49,7 @@ class StatusAdapter(
                 .load(File(item.filePath))
                 .apply(
                     RequestOptions()
-                        .transform(RoundedCorners(24))
+                        .transform(RoundedCorners(20))
                         .placeholder(R.color.card_dark_elevated)
                         .error(R.color.card_dark_elevated)
                 )

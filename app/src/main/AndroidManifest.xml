@@ -23,6 +23,7 @@
 
     <!-- Set wallpaper -->
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Query installed apps for WhatsApp -->
     <queries>
@@ -54,6 +55,11 @@
             android:name=".ui.ImageViewerActivity"
             android:exported="false"
             android:theme="@style/Theme.SaveStatusPRO.FullScreen" />
+
+        <activity
+            android:name=".ui.AboutActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SaveStatusPRO" />
 
         <activity
             android:name=".ui.VideoPlayerActivity"
