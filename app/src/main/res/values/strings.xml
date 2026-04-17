@@ -13,8 +13,8 @@
     <string name="about_permissions_title">Permissions Insight</string>
     <string name="about_permissions_body">• Storage access is used to read WhatsApp .Statuses and save files to your Downloads folder.\n• No background upload of your media is performed by this app.</string>
     <string name="about_version_title">Version</string>
-    <string name="about_current_version_value">Current version: %1$s</string>
-    <string name="about_latest_version_value">Latest version: %1$s</string>
+    <string name="about_current_version_value">Current version: v%1$s</string>
+    <string name="about_latest_version_value">Latest version: v%1$s</string>
     <string name="about_latest_version_unavailable">Latest version: Not published yet</string>
     <string name="about_update_now">Update now</string>
     <string name="about_up_to_date">You are on the latest version</string>

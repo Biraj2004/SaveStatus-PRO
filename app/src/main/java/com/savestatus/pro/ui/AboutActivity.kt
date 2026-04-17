@@ -115,7 +115,7 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun bindCurrentVersion() {
-        tvCurrentVersion.text = getString(R.string.about_current_version_value, getCurrentVersionName())
+        tvCurrentVersion.text = getString(R.string.about_current_version_value, normalizeVersion(getCurrentVersionName()))
     }
 
     private fun fetchLatestVersion() {
@@ -139,7 +139,7 @@ class AboutActivity : AppCompatActivity() {
 
                     val payload = connection.inputStream.bufferedReader().use { it.readText() }
                     val tag = JSONObject(payload).optString("tag_name", "")
-                    tag.removePrefix("v").trim().ifBlank { null }
+                    normalizeVersion(tag).ifBlank { null }
                 }.getOrNull()
             }
 
@@ -159,8 +159,9 @@ class AboutActivity : AppCompatActivity() {
 
         tvLatestVersion.text = getString(R.string.about_latest_version_value, latestVersion)
 
-        val currentVersion = getCurrentVersionName().removePrefix("v").trim()
-        val needsUpdate = currentVersion != latestVersion
+        val currentVersion = normalizeVersion(getCurrentVersionName())
+        val latestNormalized = normalizeVersion(latestVersion)
+        val needsUpdate = compareVersions(currentVersion, latestNormalized) < 0
 
         if (needsUpdate) {
             tvLatestVersion.setTextColor(ContextCompat.getColor(this, R.color.version_latest_highlight))
@@ -190,6 +191,31 @@ class AboutActivity : AppCompatActivity() {
             }
             packageInfo.versionName ?: "1.0.0"
         }.getOrDefault("1.0.0")
+    }
+
+    private fun normalizeVersion(value: String): String {
+        return value
+            .trim()
+            .removePrefix("v")
+            .removePrefix("V")
+            .ifBlank { "1.0.0" }
+    }
+
+    private fun compareVersions(current: String, latest: String): Int {
+        val currentParts = current.split('.', '-', '_')
+        val latestParts = latest.split('.', '-', '_')
+        val maxLength = maxOf(currentParts.size, latestParts.size)
+
+        for (index in 0 until maxLength) {
+            val currentPart = currentParts.getOrNull(index)?.toIntOrNull() ?: 0
+            val latestPart = latestParts.getOrNull(index)?.toIntOrNull() ?: 0
+
+            if (currentPart != latestPart) {
+                return currentPart.compareTo(latestPart)
+            }
+        }
+
+        return 0
     }
 
     private fun runEnterAnimations() {
