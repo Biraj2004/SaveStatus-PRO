@@ -40,7 +40,8 @@ SaveStatus PRO is a clean and performance-focused Android app for viewing and sa
 7. [Release Process](#release-process)
 8. [Permissions and Privacy](#permissions-and-privacy)
 9. [Troubleshooting](#troubleshooting)
-10. [Maintainer](#maintainer)
+10. [Contributing](#contributing)
+11. [Maintainer](#maintainer)
 
 ## Features
 
@@ -231,6 +232,12 @@ Version consistency checklist:
 
 - Publish at least one GitHub release with tag format like `v1.0.1`
 - Confirm internet connectivity on device
+
+## Contributing
+
+Contributions are welcome.
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for setup steps, branch and commit conventions, PR checklist, and issue reporting guidance.
 
 ## Maintainer
 
