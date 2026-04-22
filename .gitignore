@@ -15,17 +15,7 @@ gradle/wrapper/gradle-wrapper.jar
 local.properties
 
 # Android Studio / IntelliJ IDEA
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/shelf/
-.idea/caches/
-.idea/deploymentTargetSelector.xml
-.idea/deviceManager.xml
-.idea/navEditor.xml
-.idea/assetWizardSettings.xml
-.idea/studiobot.xml
-.idea/appInsightsSettings.xml
-.idea/copilot.data.migration.ask2agent.xml
+.idea/
 *.iml
 
 # Android Studio profiler / layout inspector captures
@@ -98,4 +88,5 @@ release.keystore
 *.jks
 *.keystore
 
-/.GraphicsPath
+# Accidental binary artifact filenames from external tooling
+*.GraphicsPath
